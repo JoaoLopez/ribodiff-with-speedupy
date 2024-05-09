@@ -20,7 +20,7 @@ def test_count(data, opts):
     @type opts: Instance
     """
 
-    print 'Start the statistical test.'
+    print('Start the statistical test.')
 
     num = len(data.geneIDs)
     pval = np.empty((num, 1))
@@ -39,9 +39,9 @@ def test_count(data, opts):
         sys.stdout.flush()
 
         if i % 50 == 0:
-            print '\r%i genes finished...' % i ,
+            print('\r%i genes finished...' % i ,)
         if i+1 == num:
-            print '\r%i genes finished.' % num
+            print('\r%i genes finished.' % num)
 
         if opts.dispDiff and np.isnan(data.dispAdjRibo[i]):
             continue

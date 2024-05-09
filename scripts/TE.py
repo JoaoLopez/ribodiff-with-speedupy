@@ -11,7 +11,13 @@ Details:
 
 import sys
 import os
-from ribodiff.parseopts import *
+
+PROJECT_DIR = os.path.join(os.path.dirname(__file__), '..')
+RIBODIFF_DIR = os.path.join(PROJECT_DIR, 'src/ribodiff')
+sys.path.append(PROJECT_DIR)
+sys.path.append(RIBODIFF_DIR)
+
+from src.ribodiff.parseopts import *
 
 def main():
     """
@@ -21,60 +27,60 @@ def main():
     opts = parse_options(sys.argv)
 
     import numpy as np
-    import ribodiff.loadinput as ld
-    import ribodiff.normalize as nm
-    import ribodiff.estimatedisp as ed
-    import ribodiff.testcnt as tc
-    import ribodiff.writeres as wr
-    import ribodiff.plot as pl
+    import src.ribodiff.loadinput as ld
+    import src.ribodiff.normalize as nm
+    import src.ribodiff.estimatedisp as ed
+    import src.ribodiff.testcnt as tc
+    import src.ribodiff.writeres as wr
+    import src.ribodiff.plot as pl
 
-    print '*'*25
+    print('*'*25)
     FileIn = ld.LoadInputs(opts)
     data = FileIn.parse_expt()
     data = FileIn.read_count()
-    print 'Read input files: Done.\n%i Gene(s) to be tested.' % data.geneIDs.size
+    print('Read input files: Done.\n%i Gene(s) to be tested.' % data.geneIDs.size)
 
-    print '*'*25
+    print('*'*25)
     data.libSizesRibo = nm.lib_size(data.countRibo)
     data.libSizesRna  = nm.lib_size(data.countRna)
-    print 'Library size:'
+    print('Library size:')
     np.set_printoptions(precision=3)
-    print data.experRibo
-    print data.libSizesRibo
-    print data.experRna
-    print data.libSizesRna
+    print(data.experRibo)
+    print(data.libSizesRibo)
+    print(data.experRna)
+    print(data.libSizesRna)
 
-    print '*'*25
+    print('*'*25)
     data = ed.estimate_disp(data, opts)
-    print 'Estimate dispersion: Done.'
+    print('Estimate dispersion: Done.')
 
-    print '*'*25
+    print('*'*25)
     data = tc.test_count(data, opts)
     data = tc.adj_pval(data, opts)
-    print 'Statistical test: Done.'
+    print('Statistical test: Done.')
 
-    print '*'*25
+    print('*'*25)
     data = tc.cal_TEchange(data)
-    print 'Calculate TE and fold change: Done.'
+    print('Calculate TE and fold change: Done.')
 
-    print '*'*25
+    print('*'*25)
     wr.write_result(data, opts)
-    print 'Write output file: Done.'
+    print('Write output file: Done.')
 
-    print '*'*25
+    print('*'*25)
     wr.save_data(data, opts)
     try:
         os.remove(opts.resPath + 'TmpData.pkl')
     except OSError:
         pass
-    print 'Save data: Done.'
+    print('Save data: Done.')
 
     if opts.plots:
-        print '*'*25
+        print('*'*25)
         pl.make_plots(data, opts)
-        print 'Make plots: Done.'
+        print('Make plots: Done.')
 
-    print '*'*25
+    print('*'*25)
 
 if __name__ == '__main__':
     args = sys.argv

@@ -69,7 +69,7 @@ def disper_adj(data, opts):
     """
     """
 
-    print 'Start to estimate adjusted dispersions.'
+    print('Start to estimate adjusted dispersions.')
 
     num = len(data.geneIDs)
     muAdj = np.empty((num, data.idxRibo.size + data.idxRna.size))
@@ -101,9 +101,9 @@ def disper_adj(data, opts):
         sys.stdout.flush()
 
         if i % 50 == 0:
-            print '\r%i genes finished...' % i ,
+            print('\r%i genes finished...' % i ,)
         if i+1 == num:
-            print '\r%i genes finished.' % num
+            print('\r%i genes finished.' % num)
 
         if not np.isnan(data.dispRawRibo[i]):
 
@@ -232,7 +232,7 @@ def disper_adj(data, opts):
 
 def disper_adj_scalar(data, opts):
 
-    print 'Start to estimate adjusted dispersions.'
+    print('Start to estimate adjusted dispersions.')
 
     num = len(data.geneIDs)
     muAdj = np.empty((num, data.idxRibo.size + data.idxRna.size))
@@ -257,9 +257,9 @@ def disper_adj_scalar(data, opts):
         sys.stdout.flush()
 
         if i % 50 == 0:
-            print '\r%i genes finished...' % i ,
+            print('\r%i genes finished...' % i ,)
         if i+1 == num:
-            print '\r%i genes finished.' % num
+            print('\r%i genes finished.' % num)
 
         if not np.isnan(data.dispRaw[i]):
 

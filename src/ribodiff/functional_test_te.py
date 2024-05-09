@@ -28,53 +28,53 @@ def main():
     import writeres as wr
     import plot as pl
 
-    print '*'*25
+    print('*'*25)
     FileIn = ld.LoadInputs(opts)
     data = FileIn.parse_expt()
     data = FileIn.read_count()
-    print 'Read input files: Done.\n%i Gene(s) to be tested.' % data.geneIDs.size
+    print('Read input files: Done.\n%i Gene(s) to be tested.' % data.geneIDs.size)
 
-    print '*'*25
+    print('*'*25)
     data.libSizesRibo = nm.lib_size(data.countRibo)
     data.libSizesRna  = nm.lib_size(data.countRna)
-    print 'Library size:'
+    print('Library size:')
     np.set_printoptions(precision=3)
-    print data.experRibo
-    print data.libSizesRibo
-    print data.experRna
-    print data.libSizesRna
+    print(data.experRibo)
+    print(data.libSizesRibo)
+    print(data.experRna)
+    print(data.libSizesRna)
 
-    print '*'*25
+    print('*'*25)
     data = ed.estimate_disp(data, opts)
-    print 'Testing estimate dispersion: Done.'
+    print('Testing estimate dispersion: Done.')
 
-    print '*'*25
+    print('*'*25)
     data = tc.test_count(data, opts)
     data = tc.adj_pval(data, opts)
-    print 'Testing statistical test: Done.'
+    print('Testing statistical test: Done.')
 
-    print '*'*25
+    print('*'*25)
     data = tc.cal_TEchange(data)
-    print 'Testing calculate TE and fold change: Done.'
+    print('Testing calculate TE and fold change: Done.')
 
-    print '*'*25
+    print('*'*25)
     wr.write_result(data, opts)
-    print 'Testing write output file: Done.'
+    print('Testing write output file: Done.')
 
-    print '*'*25
+    print('*'*25)
     wr.save_data(data, opts)
     try:
         os.remove(opts.resPath + 'TmpData.pkl')
     except OSError:
         pass
-    print 'Testing save data: Done.'
+    print('Testing save data: Done.')
 
     if opts.plots:
-        print '*'*25
+        print('*'*25)
         pl.make_plots(data, opts)
-        print 'Testing make plots: Done.'
+        print('Testing make plots: Done.')
 
-    print '*'*25
+    print('*'*25)
 
     try:
         os.remove(opts.resPath + 'test_result.EmpDisp.hist.pdf')

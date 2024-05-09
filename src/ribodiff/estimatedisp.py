@@ -7,7 +7,7 @@ import creatematrix as cm
 import rawdisp as rd
 import fitdisp as fd
 import adjdisp as ad
-import cPickle as pickle
+import _pickle as pickle
 
 def estimate_disp(data, opts):
     """ Create explanatory matrix and estimate dispersion. 
@@ -30,21 +30,21 @@ def estimate_disp(data, opts):
     else:
         data = rd.disper_raw_scalar(data, opts)
     with open(pklFile, 'wb') as FileOut:
-        pickle.dump(data, FileOut, pickle.HIGHEST_PROTOCOL)
+        pickle.dump(data, FileOut, 5)
 
-    print '*'*25
+    print('*'*25)
 
     data = fd.disper_fit(data, opts)
     with open(pklFile, 'wb') as FileOut:
-        pickle.dump(data, FileOut, pickle.HIGHEST_PROTOCOL)
+        pickle.dump(data, FileOut, 5)
 
-    print '*'*25
+    print('*'*25)
 
     if opts.dispDiff:
         data = ad.disper_adj(data, opts)
     else:
         data = ad.disper_adj_scalar(data, opts)
     with open(pklFile, 'wb') as FileOut:
-        pickle.dump(data, FileOut, pickle.HIGHEST_PROTOCOL)
+        pickle.dump(data, FileOut, 5)
 
     return data

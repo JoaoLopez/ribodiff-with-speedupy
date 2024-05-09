@@ -39,7 +39,7 @@ def do_fitting(data, obj):
     matrix[:, 0] = 1 / countMean[idx].flatten()
     matrix[:, 1] = 1
 
-    modGamma = sm.GLM(dispRaw[idx], matrix, family=sm.families.Gamma(sm.families.links.identity))
+    modGamma = sm.GLM(dispRaw[idx], matrix, family=sm.families.Gamma(sm.families.links.Identity()))
     result = modGamma.fit()
     Lambda = result.params
 
@@ -47,7 +47,7 @@ def do_fitting(data, obj):
     IDX = ~np.isnan(dispRaw)
     dispFitted[IDX] = Lambda[0] / countMean[IDX] + Lambda[1]
     if np.nonzero(dispFitted < 0)[0].size > 0:
-        print 'Negative fitted dispersion exist!' 
+        print('Negative fitted dispersion exist!')
 
     if obj == 'Ribo':
         data.dispFittedRibo = dispFitted
@@ -65,9 +65,9 @@ def do_fitting(data, obj):
         pass
 
     if obj != 'RR':
-        print 'Fit dispersion for %s: Done.' % obj
+        print('Fit dispersion for %s: Done.' % obj)
     else:
-        print 'Fit dispersion: Done.'
+        print('Fit dispersion: Done.')
 
     return data
 
@@ -75,7 +75,7 @@ def disper_fit(data, opts):
 
     if opts.dispDiff:
         data = do_fitting(data, obj='Ribo')
-        print '*'*25
+        print('*'*25)
         data = do_fitting(data, obj='mRNA')
     else:
         data = do_fitting(data, obj='RR')

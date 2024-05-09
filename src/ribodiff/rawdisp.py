@@ -14,7 +14,7 @@ def disper_raw(data, opts):
 
     cntCutoff = opts.sumCntCutoff
 
-    print 'Start to estimate raw dispersions.'
+    print('Start to estimate raw dispersions.')
 
     num = len(data.geneIDs)
     muRaw = np.empty((num, data.idxRibo.size + data.idxRna.size))
@@ -38,9 +38,9 @@ def disper_raw(data, opts):
         sys.stdout.flush()
 
         if i % 50 == 0:
-            print '\r%i genes finished...' % i ,
+            print('\r%i genes finished...' % i ,)
         if i+1 == num:
-            print '\r%i genes finished.' % num
+            print('\r%i genes finished.' % num)
 
         if sum(data.countRibo[i, :] / data.libSizesRibo) >= cntCutoff and sum(data.countRna[i, :] / data.libSizesRna) >= cntCutoff:
 
@@ -166,7 +166,7 @@ def disper_raw_scalar(data, opts):
 
     cntCutoff = opts.sumCntCutoff
 
-    print 'Start to estimate raw dispersions.'
+    print('Start to estimate raw dispersions.')
 
     num = len(data.geneIDs)
     muRaw = np.empty((num, data.idxRibo.size + data.idxRna.size))
@@ -184,9 +184,9 @@ def disper_raw_scalar(data, opts):
         sys.stdout.flush()
 
         if i % 50 == 0:
-            print '\r%i genes finished...' % i ,
+            print('\r%i genes finished...' % i ,)
         if i+1 == num:
-            print '\r%i genes finished.' % num
+            print('\r%i genes finished.' % num)
 
         if sum(data.countRibo[i, :] / data.libSizesRibo) >= cntCutoff and sum(data.countRna[i, :] / data.libSizesRna) >= cntCutoff:
 

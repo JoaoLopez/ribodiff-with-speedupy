@@ -4,7 +4,7 @@ Output result files.
 """
 
 import numpy as np
-import cPickle as pickle
+import _pickle as pickle
 
 def write_result(data, opts):
     """
@@ -71,5 +71,5 @@ def save_data(data, opts):
             outputNamePrefix = opts.outFile[:pos]
         pklFile = outputNamePrefix + '.pkl'
     with open(pklFile, 'wb') as FileOut:
-        pickle.dump(data, FileOut, pickle.HIGHEST_PROTOCOL)
+        pickle.dump(data, FileOut, 5)
 
