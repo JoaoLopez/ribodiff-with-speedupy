@@ -140,7 +140,7 @@ def generate_count(options):
             numDiff = numDiffUp + numDiffDn
 
         if numDiff > options.numEntry:
-            print 'numDiff should be smaller than numGene!'
+            print('numDiff should be smaller than numGene!')
             sys.exit()
 
         shapeParam = options.shapeGamma
@@ -196,5 +196,5 @@ if __name__ == '__main__':
 
     options = parse_options(sys.argv)
     generate_count(options)
-    print '%s: Done!' % options.output
+    print('%s: Done!' % options.output)
 
